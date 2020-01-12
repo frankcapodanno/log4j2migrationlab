@@ -1,16 +1,13 @@
 package capodanno.click.lablog4j;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.logging.Logger;
 import java.util.zip.Deflater;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.Layout;
-import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.apache.logging.log4j.core.appender.rolling.CompositeTriggeringPolicy;
 import org.apache.logging.log4j.core.appender.rolling.DefaultRolloverStrategy;
@@ -18,15 +15,11 @@ import org.apache.logging.log4j.core.appender.rolling.OnStartupTriggeringPolicy;
 import org.apache.logging.log4j.core.appender.rolling.SizeBasedTriggeringPolicy;
 import org.apache.logging.log4j.core.appender.rolling.TriggeringPolicy;
 import org.apache.logging.log4j.core.config.AppenderRef;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.ConfigurationFactory;
 import org.apache.logging.log4j.core.config.ConfigurationSource;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.DefaultConfiguration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
-import org.apache.logging.log4j.core.config.Order;
 import org.apache.logging.log4j.core.config.Property;
-import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 
 /**
@@ -42,22 +35,22 @@ public final class GeneralLoggingConfiguration {
     public static String log_file_name_pattern = "logger-example-out-%i.log";
     public static String file_path = "logs/";
     
-    //rolling file properties
-    @Plugin(category = ConfigurationFactory.CATEGORY, name = "GeneralLoggingConfigurationFactory")
-    @Order(1)
-    public static class GeneralLoggingConfigurationFactory  extends ConfigurationFactory {
-        public static final String[] SUFFIXES = new String[] {".json", "*"};
-
-        @Override
-        protected String[] getSupportedTypes() {
-            return SUFFIXES;
-        }
-
-		@Override
-		public Configuration getConfiguration(LoggerContext loggerContext, ConfigurationSource source) {
-			return null;
-		}
-    }
+//    //rolling file properties
+//    @Plugin(category = ConfigurationFactory.CATEGORY, name = "GeneralLoggingConfigurationFactory")
+//    @Order(1)
+//    public static class GeneralLoggingConfigurationFactory  extends ConfigurationFactory {
+//        public static final String[] SUFFIXES = new String[] {".json", "*"};
+//
+//        @Override
+//        protected String[] getSupportedTypes() {
+//            return SUFFIXES;
+//        }
+//
+//		@Override
+//		public Configuration getConfiguration(LoggerContext loggerContext, ConfigurationSource source) {
+//			return null;
+//		}
+//    }
     
     public static void configure() {
     	Log4j2Configuration.runConfiguration();
