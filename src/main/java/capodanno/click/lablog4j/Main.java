@@ -18,8 +18,10 @@ public class Main {
 		Properties props = System.getProperties();
 		props.setProperty("log4j1.compatibility", "true");
 		
+		// Configure the Logging-System
 		GeneralLoggingConfiguration.configure();
 
+		// Create some messages
 		for (int i = 0; i <= 150; i++) {
 			logger.info("info message");
 			logger.debug("debug message");
