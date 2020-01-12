@@ -19,10 +19,15 @@ public class Main {
 		props.setProperty("log4j1.compatibility", "true");
 		
 		// Configure the Logging-System
-		GeneralLoggingConfiguration.configure();
+		ChangeLoggingConfiguration gc = new ChangeLoggingConfiguration();
+    	gc.setLevelLog4j1(org.apache.log4j.Level.INFO);
+    	gc.setConsolePattern("%d{yyyy-MM-dd HH:mm:ss} from programmatic %-5p %c{1}:%L - %m%n");
+    	gc.setRollingFileNameFile("target/test-rolling-file.log");
+    	gc.setRollingFilePattern("target/test-%i.log");
+		gc.doConfigure();
 
 		// Create some messages
-		for (int i = 0; i <= 150; i++) {
+		for (int i = 0; i <= 10; i++) {
 			logger.info("info message");
 			logger.debug("debug message");
 			logger.error("error message");
