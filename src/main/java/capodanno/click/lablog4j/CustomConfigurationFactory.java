@@ -19,22 +19,25 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Order(50)
 public class CustomConfigurationFactory extends ConfigurationFactory {
 
-    static Configuration createConfiguration(final String name, ConfigurationBuilder<BuiltConfiguration> builder) {
+   
+
+	static Configuration createConfiguration(final String name, ConfigurationBuilder<BuiltConfiguration> builder) {
         builder.setConfigurationName(name);
-        builder.setStatusLevel(Level.ERROR);
+        builder.setStatusLevel(Level.ERROR); // ALL all internal message just in case of error
         builder.add(builder.newFilter("ThresholdFilter", Filter.Result.ACCEPT, Filter.Result.NEUTRAL).
             addAttribute("level", Level.DEBUG));
         AppenderComponentBuilder appenderBuilder = builder.newAppender("Stdout", "CONSOLE").
             addAttribute("target", ConsoleAppender.Target.SYSTEM_OUT);
         appenderBuilder.add(builder.newLayout("PatternLayout").
-            addAttribute("pattern", "%d [%t] %-5level other  try something: %msg%n%"));
+            addAttribute("pattern", "%d [%t] %-5level  other  try something: %msg%n%"));
         appenderBuilder.add(builder.newFilter("MarkerFilter", Filter.Result.DENY,
             Filter.Result.NEUTRAL).addAttribute("marker", "FLOW"));
         builder.add(appenderBuilder);
         builder.add(builder.newLogger("org.apache.logging.log4j", Level.DEBUG).
             add(builder.newAppenderRef("Stdout")).
             addAttribute("additivity", false));
-        builder.add(builder.newRootLogger(Level.ERROR).add(builder.newAppenderRef("Stdout")));
+        builder.add(builder.newRootLogger(Level.DEBUG).add(builder.newAppenderRef("Stdout")));
+        
         return builder.build();
     }
 
